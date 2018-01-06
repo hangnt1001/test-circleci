@@ -6,7 +6,7 @@ jobs:
      - image: circleci/openjdk:8-jdk
     working_directory: ~/my-flex-repo
     environment:
-      JVM_OPTS: -Xmx320m
+      JVM_OPTS: -Xmx3200m
       TERP: dumb
     steps:
      - checkout
