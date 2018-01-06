@@ -199,24 +199,6 @@
             <artifactId>liquibase-slf4j</artifactId>
             <version>${liquibase-slf4j.version}</version>
         </dependency>
-        <!-- jhipster-needle-maven-add-dependency -->
-        <dependency>
-            <groupId>com.mediastep.beecow</groupId>
-            <artifactId>beecow-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mediastep.beecow</groupId>
-            <artifactId>beecow-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.mediastep.beecow</groupId>
-            <artifactId>user-shared</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
         <dependency>
             <groupId>com.ryantenney.metrics</groupId>
             <artifactId>metrics-spring</artifactId>
@@ -583,21 +565,6 @@
         <dependency>
             <groupId>org.springframework.social</groupId>
             <artifactId>spring-social-twitter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mediastep.beecow</groupId>
-            <artifactId>sms-shared</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>com.mediastep.beecow</groupId>
-            <artifactId>store-shared</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-        	<groupId>com.mediastep.beecow</groupId>
-        	<artifactId>job-shared</artifactId>
-        	<version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
     <build>
