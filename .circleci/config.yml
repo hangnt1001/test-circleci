@@ -34,7 +34,7 @@ jobs:
         command: mvn dependency:go-offline
      - run:
         name: Run Test And Package
-        command: ./mvn clean test
+        command: mvn clean test
      - run:
         name: Save Test Result
         command: |
@@ -48,7 +48,7 @@ jobs:
      - setup_remote_docker
      - run:
         name: Build Docker Image 
-        command: ./mvn package -Pprod docker:build
+        command: mvn package -Pprod docker:build
      - save_cache:
         paths:
          - ~/.m2
