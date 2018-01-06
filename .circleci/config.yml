@@ -1,0 +1,54 @@
+#sample circleci 
+version: 2
+jobs:
+  build:
+    docker:
+     - image: circleci/openjdk:8-jdk
+    working_directory: ~/my-flex-repo
+    environment:
+      JVM_OPTS: -Xmx320m
+      TERP: dumb
+    steps:
+     - checkout
+     - run:
+        name: Download Node
+        command: curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash
+     - run:
+        name: Install Node
+        command: sudo apt-get install -y nodejs
+     - run:
+        name: update-npm
+        command: sudo npm install -g npm@latest
+     - run:
+        name: Download Yarn
+        command: curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add && echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+     - run:
+        name: Install Yarn
+        command: sudo apt-get update && sudo apt-get install yarn
+     - restore_cache:
+        keys:
+         - v1-dependencies-{{ checksum "pom.xml"}}
+         - v1-dependencies-
+     - run:
+        name: Run Maven dependency
+        command: mvn dependency:go-offline
+     - run:
+        name: Run Test And Package
+        command: ./mvn clean test
+     - run:
+        name: Save Test Result
+        command: |
+         mkdir -p ~/junit/
+         find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
+        when: always
+     - store_test_results:
+        path: ~/junit
+     - store_artifacts:
+        path: ~/junit
+     - setup_remote_docker
+     - run:
+        name: Build Docker Image 
+        command: ./mvn package -Pprod docker:build
+     - save_cache:
+        path: ~/.m2
+        key: v1-dependencies-{{ checksum "pom.xml" }}
